@@ -1,0 +1,8 @@
+<h1>Tutor list</h1>
+<ul>
+{% for tutor in object_list %}
+    <li><a href={{ tutor.get_absolute_url }}>{{ tutor.bio }} - {{ tutor.email }}</a></li>
+{% empty %}
+    <li>No Active Tutor yet.</li>
+{% endfor %}
+</ul>

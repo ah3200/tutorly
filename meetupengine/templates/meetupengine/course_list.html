@@ -1,0 +1,8 @@
+<h1>Course list</h1>
+<ul>
+{% for course in object_list %}
+    <li><a href={{ course.get_absolute_url }}>{{ course.subject }} - {{ course.level }}</a></li>
+{% empty %}
+    <li>No available course yet.</li>
+{% endfor %}
+</ul>
