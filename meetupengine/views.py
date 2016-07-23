@@ -3,7 +3,11 @@ from django.views.generic import ListView, DetailView
 from meetupengine.models import Tutor, Course, Classroom, Registration, Student
 
 # Create your views here.
+from django.http import HttpResponse
 
+def index(request):
+    return render(request,'meetupengine/index.html')
+#    return HttpResponse("Hello, world. You're at the tutor app index.")
 
 # Tutor list view
 class TutorListView(ListView):
