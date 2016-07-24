@@ -36,7 +36,7 @@ class Course(models.Model):
         return reverse('course-detail', kwargs={'slug':self.slug})
 
 class Classroom(models.Model):
-    course = models.ForeignKey(Course)
+    course = models.ForeignKey(Course, related_name='classrooms')
     slug = models.SlugField(max_length=40, default='classroom-template')
     location = models.TextField(max_length=50)
     datetime_from = models.DateTimeField()

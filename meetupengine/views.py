@@ -46,9 +46,30 @@ class CourseDetailView(DetailView):
         return context
 
 # Classroom list view
-
+class ClassroomListView(ListView):
+    
+    template_name = 'meetupengine/classroom_list.html'
+    context_object_name = "course"
+    
+    def get_queryset(self):
+        return Course.objects.prefetch_related("classrooms").all()
+    
+    def get_context_data(self, **kwargs):
+        context = super(ClassroomListView, self).get_context_data(**kwargs)
+        return context
 # Classroom details view
 
 # Student list view
 
 # Registration list view
+class RegistrationListView(ListView):
+    
+    model = Registration
+    
+    def get_context_data(self, **kwargs):
+        context = super(RegistrationListView, self).get_context_data(**kwargs)
+        return context
+        
+
+    
+    

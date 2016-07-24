@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^tutor/(?P<slug>[-\w]+)/$', TutorDetailView.as_view(), name='tutor-detail'),
     url(r'^course/(?P<page>\d+)?/?$', CourseListView.as_view(paginate_by=2), name='course-list'),
     url(r'^course/(?P<slug>[-\w]+)/$', CourseDetailView.as_view(), name='course-detail'),
+    url(r'^classroom/(?P<page>\d+)?/?$', ClassroomListView.as_view(paginate_by=2), name='classroom-list'),
 ]
