@@ -56,21 +56,20 @@ class ClassroomListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super(ClassroomListView, self).get_context_data(**kwargs)
-        print context
         return context
 # Classroom details view
 
-# Student list view
-
-# Registration list view
-class RegistrationListView(ListView):
+# Student details view
+class StudentDetailView(DetailView):
     
-    model = Registration
+    model = Student
     
     def get_context_data(self, **kwargs):
-        context = super(RegistrationListView, self).get_context_data(**kwargs)
+        context = super(StudentDetailView, self).get_context_data(**kwargs)
         return context
-        
+
+# Registration list view
+
 
     
     

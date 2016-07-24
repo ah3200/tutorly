@@ -20,9 +20,13 @@ class Tutor(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User, related_name='student')
     bio = models.TextField(default='', blank=True)
+    slug = models.SlugField(max_length=40, default='default_name')
     phone = models.CharField(max_length=20, blank=True, default='')
     email = models.EmailField(max_length=30, blank=True)
     city = models.CharField(max_length=100, default='', blank=True)
+    
+    def get_absolute_url(self):
+        return reverse('student-detail', kwargs={'slug':self.slug})
     
 class Course(models.Model):
     name = models.TextField(max_length=50)
