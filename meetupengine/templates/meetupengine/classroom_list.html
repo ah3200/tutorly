@@ -7,6 +7,9 @@
     <li>{{ classroom.location }}</li>
     <li>{{ classroom.datetime_from }}</li>
     <li>{{ classroom.datetime_to }}</li>
+    {% for register in classroom.registrations.all %}
+        <li>{{ register.student.bio }}</li>
+    {% endfor %}
   {% endfor %}
   </ul>
 {% endfor %} 

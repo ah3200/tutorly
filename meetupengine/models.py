@@ -46,8 +46,8 @@ class Classroom(models.Model):
     registered = models.IntegerField()
 
 class Registration(models.Model):
-    classroom = models.ForeignKey(Classroom)
-    student = models.ForeignKey(Student)
+    classroom = models.ForeignKey(Classroom, related_name='registrations')
+    student = models.ForeignKey(Student, related_name='registrations')
     registration_status = models.TextField(max_length=20)
 
 

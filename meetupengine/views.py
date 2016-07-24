@@ -56,6 +56,7 @@ class ClassroomListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super(ClassroomListView, self).get_context_data(**kwargs)
+        print context
         return context
 # Classroom details view
 
