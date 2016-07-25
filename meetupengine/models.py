@@ -47,7 +47,7 @@ class Classroom(models.Model):
     datetime_to = models.DateTimeField()
     schedule = models.TextField()
     max_registration = models.IntegerField()
-    registered = models.IntegerField()
+    registered = models.IntegerField(default=0)
 
 class Registration(models.Model):
     classroom = models.ForeignKey(Classroom, related_name='registrations')
