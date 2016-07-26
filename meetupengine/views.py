@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from meetupengine.models import Tutor, Course, Classroom, Registration, Student
 from meetupengine.forms import CourseForm, ClassroomForm, RegistrationForm, ClassroomFormSet
@@ -69,7 +69,7 @@ class StudentDetailView(DetailView):
         context = super(StudentDetailView, self).get_context_data(**kwargs)
         return context
 
-# Tutor creates (delete, update) Course 
+# Tutor creates Course and Classrooms
 def createNewCourse(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -88,22 +88,29 @@ def createNewCourse(request):
                 return redirect('/course/')
     return render(request,'meetupengine/new_course.html',{'form':CourseForm(),'classroom_form':ClassroomFormSet()})
 
-# Tutor add (delete, update) classrooms
-def createNewClassroom(request):
+# Tutor update/delete Courses and Classrooms
+def editCourse(request, slug):
+    course = get_object_or_404(Course, slug=slug)
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = ClassroomForm(request.POST)
+        course_form = CourseForm(request.POST, instance=course)
             # check whether it's valid:
-        if form.is_valid():
-            post = form.save(commit=False)
-#            storypost.pub_date = timezone.now()
-#            storypost.site = get_current_site(request)
-#            post.tutor = Tutor.objects.get(user=request.user)
-            post.save()
+        if course_form.is_valid():
+            post = course_form.save(commit=False)
+            classroom_form = ClassroomFormSet(request.POST, instance=post)
+            post.tutor = Tutor.objects.get(user=request.user)
+
+            if classroom_form.is_valid():
+                post.save()
+                classroom_form.save()
+
             # Without this next line the tags won't be saved.
             #  form.save_m2m()
-            return redirect('/course/')
-    return render(request,'meetupengine/new_classroom.html',{'form':ClassroomForm()})
+                return redirect('/course/', slug=course.slug)
+    else:
+        course_form = CourseForm(instance=course)
+        classroom_form = ClassroomFormSet(instance=course)
+    return render(request,'meetupengine/new_course.html',{'form':course_form,'classroom_form':classroom_form})
 
 # Student registered (drop) classroom
 

@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^course/(?P<slug>[-\w]+)/$', CourseDetailView.as_view(), name='course-detail'),
     url(r'^classroom/(?P<page>\d+)?/?$', ClassroomListView.as_view(paginate_by=10), name='classroom-list'),
     url(r'^student/(?P<slug>[-\w]+)/$', StudentDetailView.as_view(), name='student-detail'),
-    url(r'^create/$', createNewCourse),
+    url(r'^create/$', createNewCourse, name='course-create'),
+    url(r'^course/(?P<slug>[-\w]+)/edit/$', editCourse, name='course-edit'),
 ]

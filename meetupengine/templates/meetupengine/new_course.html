@@ -1,5 +1,5 @@
 <h2>Create new course</h2>
-<form action="/create/" method="post">{% csrf_token %}
+<form method="post">{% csrf_token %}
     {{ form.as_p|safe }}
     {{ classroom_form.as_p|safe }}
     <button type="submit" name="action">Submit</button>

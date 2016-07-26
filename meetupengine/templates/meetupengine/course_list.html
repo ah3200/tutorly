@@ -1,7 +1,9 @@
 <h1>Course list</h1>
 <ul>
 {% for course in object_list %}
-    <li><a href={{ course.get_absolute_url }}>{{ course.subject }} - {{ course.level }}</a></li>
+    <li><a href={{ course.get_absolute_url }}>{{ course.subject }} - {{ course.level }}</a>
+    <a href="{% url 'course-edit' slug=course.slug %}">Edit this course</a>
+    </li>
 {% empty %}
     <li>No available course yet.</li>
 {% endfor %}
