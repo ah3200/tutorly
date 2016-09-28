@@ -1,4 +1,4 @@
 # tutorly
-Tutor meetup Django app
+Personal project - Tutor meetup Django app
 
 
